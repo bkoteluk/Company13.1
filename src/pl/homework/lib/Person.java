@@ -37,6 +37,6 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " " + " pesel: " + pesel;
+        return firstName + " " + lastName + " " + " pesel: " + pesel + " ";
     }
 }

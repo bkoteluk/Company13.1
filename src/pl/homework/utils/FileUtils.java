@@ -10,8 +10,8 @@ public class FileUtils {
 
     public static Employee[] staffReader() throws IOException {
         Employee[] employees = new Employee[4];
-        FileReader fileReader = new FileReader(EMPLOYEES_DB);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        File file = new File(EMPLOYEES_DB);
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         String line = "";
         int i = 0;
         while((line = bufferedReader.readLine()) != null) {
@@ -19,7 +19,7 @@ public class FileUtils {
             employees[i] = new Employee(strings[0], strings[1], strings[2], strings[3], Double.parseDouble(strings[4]));
             i++;
         }
-         bufferedReader.close();
+        bufferedReader.close();
         return employees;
     }
 
