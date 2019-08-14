@@ -7,6 +7,7 @@ import java.io.*;
 public class FileUtils {
 
     public static final String EMPLOYEES_DB = "employees.csv";
+    public static final String EMPLOYEES_STAT = "emp_stat.txt";
 
     public static Employee[] staffReader() throws IOException {
         Employee[] employees = new Employee[4];

@@ -1,7 +1,7 @@
 package pl.homework.lib;
 
 public class Company implements Numerable {
-    Employee[] employees;
+    private Employee[] employees;
 
     public Company(Employee[] employees) {
         this.employees = employees;
@@ -26,25 +26,18 @@ public class Company implements Numerable {
 
     @Override
     public double minimumSalary() {
-        double minSalary = 0;
-        boolean first = true;
+        double minSalary = employees[0].getSalary();
         for (Employee employee: employees) {
-            if (first) {
+            if (minSalary > employee.getSalary()) {
                 minSalary = employee.getSalary();
-                first = false;
-            } else {
-                if (minSalary > employee.getSalary()) {
-                    minSalary = employee.getSalary();
-                }
             }
-
         }
         return minSalary;
     }
 
     @Override
     public double maximumSalary() {
-        double maxSalary = 0;
+        double maxSalary = employees[0].getSalary();
         for (Employee employee: employees) {
             if (maxSalary < employee.getSalary()) {
                 maxSalary = employee.getSalary();
@@ -60,7 +53,6 @@ public class Company implements Numerable {
         for (int i = 0; i < divisions.length ; i++) {
             divisions[i] = new Division();
         }
-
         for (Employee employee: employees) {
             for (int i = 0; i< divisions.length; i++) {
                 if (divisions[i].getName() == null) {

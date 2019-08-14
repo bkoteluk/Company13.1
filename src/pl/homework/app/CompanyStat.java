@@ -3,7 +3,13 @@ package pl.homework.app;
 import pl.homework.lib.Company;
 import pl.homework.lib.Division;
 import pl.homework.lib.Employee;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+
+import static pl.homework.utils.FileUtils.EMPLOYEES_STAT;
 import static pl.homework.utils.FileUtils.staffReader;
 
 public class CompanyStat {
@@ -18,18 +24,31 @@ public class CompanyStat {
     }
 
 
-    public static void printCompanyStat(Company company){
+    public static void printCompanyStat(Company company) throws IOException {
         Division[] divisions;
-
-        System.out.println("Średnia wypłata :" + company.averageSalary());
-        System.out.println("Najmniejsza wypłata : " + company.minimumSalary());
-        System.out.println("Największa wypłata : " + company.maximumSalary());
-        System.out.println("Łączna liczba pracownikków: " + company.getEmployees().length);
+        File file = new File(EMPLOYEES_STAT);
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+        String line = "Średnia wypłata :" + company.averageSalary() + "\n";
+        bufferedWriter.write(line);
+        System.out.print(line);
+        line = "Najmniejsza wypłata : " + company.minimumSalary()+ "\n";
+        bufferedWriter.write(line);
+        System.out.print(line);
+        line = "Największa wypłata : " + company.maximumSalary()+ "\n";
+        bufferedWriter.write(line);
+        System.out.print(line);
+        line = "Łączna liczba pracownikków: " + company.getEmployees().length + "\n";
+        bufferedWriter.write(line);
+        System.out.print(line);
 
         divisions = company.divistionStat();
         for (Division division: divisions) {
-            System.out.println("Liczba pracowników w dziale " + division);
+            line = "Liczba pracowników w dziale " + division+ "\n";
+            bufferedWriter.write(line);
+            System.out.print(line);
         }
+        bufferedWriter.flush();
+        bufferedWriter.close();
 
         System.out.println("\n >>> Wczytana baza pracowników :");
         for (Employee employee : company.getEmployees()) {
